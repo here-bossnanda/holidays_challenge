@@ -1,0 +1,10 @@
+<% if(checkValidate){ %>
+    <% checkValidate.message.forEach(el => { %>
+        <div class="alert-<%= checkValidate.status %>">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            <strong><%= checkValidate.status %>!</strong>
+            <%= el %>
+        </div>
+        <% }) %>
+
+            <% } %>

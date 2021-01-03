@@ -1,0 +1,61 @@
+<!-- Form -->
+<div class="col-xl-12 col-md-6 mb-4">
+    <div class="card border-left-primary shadow h-100 py-2">
+        <div class="card-body">
+            <form action="/customers/<%= customers.id %>/accounts" method="POST">
+                <div class="form-group">
+                    <label for="type">Type: </label>
+                    <select type="text" class="form-control" name="type" id="type">
+                            <option value="On Account">On Account</option>
+                            <option value="Xtra Payroll">Xtra Payroll</option>
+                            <option value="Tabunganku">Tabunganku</option>
+                        </select>
+                </div>
+                <div class="form-group">
+                    <label for="balance">Balance: </label>
+                    <input type="text" class="form-control" name="balance" id="balance" placeholder="0">
+                </div>
+
+                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Add</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Datatables -->
+<div class="col-xl-12 col-md-6 mb-4">
+    <div class="card border-left-success shadow h-100 py-2">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="table-account" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Account Number</th>
+                            <th>Type</th>
+                            <th>Balance</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% customers.account.forEach((el,idx) => { %>
+                            <tr>
+                                <td>
+                                    <%= el.accountNumber %>
+                                </td>
+                                <td>
+                                    <%= el.type %>
+                                </td>
+                                <td>
+                                    <%= el.balance.toLocaleString('en-ID', {style: 'currency', currency: 'IDR'}) %>
+                                </td>
+                                <td>
+                                    <a href="/customers/<%= customers.id %>/accounts/<%= el.id %>/transfer" class="btn btn-sm btn-info"> <i class="fas fa-eye"> </i> Transfer </a>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,70 @@
+<%- include('../../partials/header') %>
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <%- include('../../partials/sidebar') %>
+            <!-- End of Sidebar -->
+
+            <!-- Content Wrapper -->
+            <div id="content-wrapper" class="d-flex flex-column">
+
+                <!-- Main Content -->
+                <div id="content">
+
+                    <!-- Topbar -->
+                    <%- include('../../partials/navbar') %>
+                        <!-- End of Topbar -->
+
+                        <!-- Begin Page Content -->
+                        <div class="container-fluid">
+
+                            <!-- Page Heading -->
+                            <h1 class="h3 mb-4 text-gray-800">
+                                <a href="/customers/<%= data.detail.customerId %>/accounts" class="btn btn-circle btn-secondary">
+                                    <i class="fas fa-arrow-left"></i>
+                                </a>
+                                Transfer from:
+                                <%= data.detail.accountNumber %> On account
+                                    <%= data.detail.balance.toLocaleString('en-ID', {style: 'currency', currency: 'IDR'}) %>
+                            </h1>
+                            <%- include('../../message') %>
+
+                                <form action="/customers/<%= data.detail.customerId %>/accounts/<%= data.detail.id %>/transfer" method="POST">
+                                    <div class="form-group">
+                                        <label for="amount">Amount: </label>
+                                        <input type="text" class="form-control" name="amount" id="amount" placeholder="0">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="accountId">Transfer to: </label>
+                                        <select type="text" class="form-control" name="accountId" id="accountId">
+                                        <% data.accounts.forEach(el => { %>
+                                            <option value="<%= el.id %>"> <%= el.accountNumber %> - <%= el.customer.fullname %>  </option>
+                                        <% }) %>
+                                    </select>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Transfer</button>
+                                </form>
+
+                        </div>
+                        <!-- /.container-fluid -->
+
+                </div>
+                <!-- End of Main Content -->
+
+                <!-- Footer -->
+                <%- include('../../partials/footer') %>
+                    <!-- End of Footer -->
+
+            </div>
+            <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <%- include('../../partials/scroll-to-top') %>
+
+
+        <%- include('../../partials/js') %>

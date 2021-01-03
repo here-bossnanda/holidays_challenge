@@ -1,0 +1,7 @@
+<% if(checkMessage){ %>
+    <div class="alert-<%= checkMessage.status %>">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <strong><%= checkMessage.status %>!</strong>
+        <%= checkMessage.message %>
+    </div>
+    <% } %>
