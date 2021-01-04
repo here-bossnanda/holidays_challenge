@@ -63,7 +63,7 @@ class CustomerController {
 
     static updateCustomer(req, res) {
         const { id, identityNumber, fullname, address, birthDate, gender } = req.body;
-        const input = { identityNumber, fullname, address, birthDate, gender };
+        const input = { id, identityNumber, fullname, address, birthDate, gender };
 
         Customer.update(input, {
                 where: { id }
@@ -71,7 +71,7 @@ class CustomerController {
             .then(customer => {
                 res.app.locals = {
                     status: 'success',
-                    message: 'success updated employee'
+                    message: 'success updated customer'
                 }
                 res.redirect('/customers')
             })

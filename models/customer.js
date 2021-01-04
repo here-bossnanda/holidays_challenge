@@ -15,6 +15,12 @@ module.exports = (sequelize, DataTypes) => {
         }
     };
     Customer.init({
+        id: {
+            allowNull: false,
+            autoIncrement: true,
+            primaryKey: true,
+            type: DataTypes.INTEGER
+        },
         identityNumber: {
             type: DataTypes.STRING,
             validate: {
@@ -27,9 +33,11 @@ module.exports = (sequelize, DataTypes) => {
                 },
                 isUnique(value) {
                     return Customer.findOne({ where: { identityNumber: value } })
-                        .then(identityNumber => {
-                            if (identityNumber) {
-                                throw new Error('Duplicate Identity Number');
+                        .then(data => {
+                            if (data) {
+                                if (+this.id !== data.id && this.identityNumber === data.identityNumber) {
+                                    throw new Error('Duplicate Identity Number');
+                                }
                             }
                         })
                 }
